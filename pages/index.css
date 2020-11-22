@@ -21,10 +21,9 @@
 @import url('../blocks/popup/__close-btn/popup__close-btn.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
 @import url('../blocks/popup/__form/popup__form.css');
-
-@import url('../blocks/input/input.css');
-@import url('../blocks/input/__type/_name/input__type_name.css');
-@import url('../blocks/input/__type/_job/input__type_job.css');
+@import url('../blocks/popup/__input/popup__input.css');
+@import url('../blocks/popup/__input/_type/_name/popup__input_type_name.css');
+@import url('../blocks/popup/__input/_type/_job/popup__input_type_job.css');
 
 @import url('../blocks/button/button.css');
 

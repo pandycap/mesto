@@ -24,8 +24,8 @@ let formElement = document.querySelector('.popup__form');
 function formSubmitHandler (evt) {
     evt.preventDefault(); //Отмена стандартной отправки формы
 
-    let nameInput = formElement.querySelector('.input__type_name');
-    let jobInput = formElement.querySelector('.input__type_job');
+    let nameInput = formElement.querySelector('.popup__input_type_name');
+    let jobInput = formElement.querySelector('.popup__input_type_job');
     
     let profileName = document.querySelector('.profile__name');
     let profileJob = document.querySelector('.profile__job');
