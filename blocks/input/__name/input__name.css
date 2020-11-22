@@ -1,0 +1,9 @@
+.input__name {
+    margin: 54px 36px 30px;
+}
+
+@media screen and (max-width: 645px) {
+    .input__name {
+        margin: 75px 22px 0;
+    }
+}
