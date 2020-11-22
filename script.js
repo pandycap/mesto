@@ -24,8 +24,8 @@ let formElement = document.querySelector('.popup__form');
 function formSubmitHandler (evt) {
     evt.preventDefault(); //Отмена стандартной отправки формы
 
-    let nameInput = formElement.querySelector('.input__name');
-    let jobInput = formElement.querySelector('.input__job');
+    let nameInput = formElement.querySelector('.input__type_name');
+    let jobInput = formElement.querySelector('.input__type_job');
     
     let profileName = document.querySelector('.profile__name');
     let profileJob = document.querySelector('.profile__job');
@@ -35,6 +35,5 @@ function formSubmitHandler (evt) {
     popupClosed();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+// Прикрепляем обработчик к форме
 formElement.addEventListener('submit', formSubmitHandler); 

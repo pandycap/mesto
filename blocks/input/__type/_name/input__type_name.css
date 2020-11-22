@@ -1,9 +1,9 @@
-.input__name {
+.input__type_name {
     margin: 54px 0 30px;
 }
 
 @media screen and (max-width: 645px) {
-    .input__name {
+    .input__type_name {
         margin: 75px 0 0;
     }
 }

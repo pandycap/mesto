@@ -23,8 +23,8 @@
 @import url('../blocks/popup/__form/popup__form.css');
 
 @import url('../blocks/input/input.css');
-@import url('../blocks/input/__name/input__name.css');
-@import url('../blocks/input/__job/input__job.css');
+@import url('../blocks/input/__type/_name/input__type_name.css');
+@import url('../blocks/input/__type/_job/input__type_job.css');
 
 @import url('../blocks/button/button.css');
 
