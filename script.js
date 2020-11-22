@@ -19,19 +19,22 @@ function popupClosed() {
 closeButton.addEventListener('click', popupClosed);
 
 //Сохранение значения popup
-let submitButton = document.querySelector('.popup__submit-btn');
+let formElement = document.querySelector('.popup__form');
 
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
+function formSubmitHandler (evt) {
+    evt.preventDefault(); //Отмена стандартной отправки формы
 
-let inputName = document.querySelector('.input__name');
-let inputJob = document.querySelector('.input__job');
+    let nameInput = formElement.querySelector('.input__name');
+    let jobInput = formElement.querySelector('.input__job');
+    
+    let profileName = document.querySelector('.profile__name');
+    let profileJob = document.querySelector('.profile__job');
 
-
-function popupSubmit() {
-    profileName.textContent = inputName.value;
-    profileJob.textContent = inputJob.value;
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
     popupClosed();
 }
 
-submitButton.addEventListener('click', popupSubmit);
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler); 

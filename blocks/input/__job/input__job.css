@@ -1,9 +1,9 @@
 .input__job {
-    margin: 0 36px 48px;
+    margin: 0 0 48px;
 }
 
 @media screen and (max-width: 645px) {
     .input__job {
-        margin: 30px 22px 45px;
+        margin: 30px 0 45px;
     }
 }
