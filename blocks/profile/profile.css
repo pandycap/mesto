@@ -4,6 +4,7 @@
     width: 70%;
     max-width: 882px;
     margin: 40px 0 51px;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 930px) {
