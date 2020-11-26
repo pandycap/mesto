@@ -3,11 +3,15 @@
     top: -32px;
     right: -32px;
     width: 40px;
+    height: 40px;
+    background: url('../../../images/close-icon.svg') center no-repeat;
+    border: none;
 }
 
 @media screen and (max-width: 645px) {
     .popup__close-btn {
         width: 26px;
+        height: 26px;
         top: -35px;
         right: 0;
     }

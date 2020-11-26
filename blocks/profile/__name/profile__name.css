@@ -1,11 +1,13 @@
 .profile__name {
-    font-family: Inter;
     font-style: normal;
     font-weight: 500;
     font-size: 42px;
     line-height: 133%;
     color: #FFFFFF;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 425px) {
