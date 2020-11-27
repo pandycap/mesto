@@ -9,5 +9,6 @@
     .profile__info {
         margin-top: 22px;
         grid-template-columns: 1fr 18px;
+        gap: 0 8px;
     }
 }
