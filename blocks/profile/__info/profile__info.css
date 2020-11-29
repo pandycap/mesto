@@ -8,7 +8,7 @@
 @media screen and (max-width: 425px) {
     .profile__info {
         margin-top: 22px;
-        padding-left: 25px;
+        padding-left: 20px;
         grid-template-columns: 1fr 18px;
         gap: 0 8px;
     }
