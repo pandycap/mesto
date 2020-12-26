@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
     <title>mesto</title>
 </head>
+
 <body class="page">
     <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="Лого">
@@ -23,7 +25,7 @@
             <button class="button profile__add-btn" type="button" aria-label="profileAddButton"></button>
         </section>
         <section class="elements">
-            
+
         </section>
     </main>
     <footer class="footer">
@@ -34,8 +36,12 @@
             <button class="button popup__close-btn popup__close-btn_edit" type="reset"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form popup__form_profile" name="profileSubmitForm">
-                <input class="popup__input popup__input_type_name" type="text" name="userName" placeholder="Имя" value="" required>
-                <input class="popup__input popup__input_type_job" type="text" name="userJob" placeholder="О себе" value="" required>
+                <input class="popup__input popup__input_type_name" id="user-name" type="text" name="userName"
+                    placeholder="Имя" value="" minlength="2" maxlength="40" required>
+                <span class="error" id="user-name-error"></span>
+                <input class="popup__input popup__input_type_job" id="user-job" type="text" name="userJob"
+                    placeholder="О себе" value="" minlength="2" maxlength="200" required>
+                <span class="error" id="user-job-error"></span>
                 <button class="button popup__submit-btn" type="submit">Сохранить</button>
             </form>
         </div>
@@ -45,8 +51,12 @@
             <button class="button popup__close-btn popup__close-btn_place" type="reset"></button>
             <h3 class="popup__title">Новое место</h3>
             <form class="popup__form popup__form_card" name="cardSubmitForm">
-                <input class="popup__input popup__input_type_place" type="text" name="placeName" placeholder="Название" value="" required>
-                <input class="popup__input popup__input_type_url" type="url" name="placeUrl" placeholder="Ссылка на картинку" value="" required>
+                <input class="popup__input popup__input_type_place" id="place" type="text" name="placeName"
+                    placeholder="Название" value="" minlength="2" maxlength="30" required>
+                <span class="error" id="place-error"></span>
+                <input class="popup__input popup__input_type_url" id="url" type="url" name="placeUrl"
+                    placeholder="Ссылка на картинку" value="" required>
+                <span class="error" id="url-error"></span>
                 <button class="button popup__submit-btn" type="submit">Создать</button>
             </form>
         </div>
@@ -70,5 +80,7 @@
     </template>
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
+
 </html>

@@ -31,15 +31,17 @@ const templateCard = document.querySelector('.card-template');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('click', closingWithOverlay);
+    document.addEventListener('keydown', closingWithEsc);
 };
 
-function openEditPopup () {
+function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     openPopup(popupEdit);
 };
 
-function openPlacePopup () {
+function openPlacePopup() {
     openPopup(popupPlace);
 };
 
@@ -50,8 +52,24 @@ const openImagePopup = (name, link) => {
     openPopup(popupPhoto);
 };
 
+function closingWithOverlay(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+        const popupIsActive = document.querySelector('.popup_opened');
+        closePopup(popupIsActive);
+    }
+};
+
+function closingWithEsc(evt) {
+    if (evt.key === 'Escape') {
+        const popupIsActive = document.querySelector('.popup_opened');
+        closePopup(popupIsActive);
+    }
+};
+
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('click', closingWithOverlay);
+    document.removeEventListener('keydown', closingWithEsc);
 };
 
 //формирование карточки
@@ -69,10 +87,10 @@ function composeCard(item) {
         EventTarget.classList.toggle('element__like_active');
     });
     trashButton.addEventListener('click', (evt) => { //удаление карточки
-        evt.target.closest('.element').remove(); 
+        evt.target.closest('.element').remove();
     });
     imageCard.addEventListener('click', () => {
-        openImagePopup(titleCard.textContent, imageCard.src)
+        openImagePopup(titleCard.textContent, imageCard.src);
     });
     return newItem;
 };
@@ -87,12 +105,15 @@ function renderList() {
 function addNewCard() {
     const newCardName = placeInput.value;
     const newCardImage = urlInput.value;
-    const newCard = composeCard({name: newCardName, link: newCardImage});
+    const newCard = composeCard({
+        name: newCardName,
+        link: newCardImage
+    });
     cardsContainer.prepend(newCard);
 };
 
 //Сохранение значения popup профиля
-function formSubmitProfile (evt) {
+function formSubmitProfile(evt) {
     evt.preventDefault(); //Отмена стандартной отправки формы
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
@@ -100,7 +121,7 @@ function formSubmitProfile (evt) {
 };
 
 //Сохранение новой карточки
-function formSubmitCard (evt) {
+function formSubmitCard(evt) {
     evt.preventDefault(); //Отмена стандартной отправки формы
     addNewCard();
     placeInput.value = '';
