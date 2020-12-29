@@ -41,10 +41,6 @@ function openEditPopup() {
     openPopup(popupEdit);
 };
 
-function openPlacePopup() {
-    openPopup(popupPlace);
-};
-
 const openImagePopup = (name, link) => {
     popupImage.src = link;
     popupTitle.textContent = name;
@@ -53,11 +49,11 @@ const openImagePopup = (name, link) => {
 };
 
 function closingWithOverlay(evt) {
-    if (evt.target.classList.contains('popup_opened')) {
-        const popupIsActive = document.querySelector('.popup_opened');
-        closePopup(popupIsActive);
-    }
-};
+    if (evt.target.classList.contains('popup_opened')) { 
+        const popupIsActive = document.querySelector('.popup_opened'); 
+        closePopup(popupIsActive); 
+    } 
+}; 
 
 function closingWithEsc(evt) {
     if (evt.key === 'Escape') {
@@ -83,8 +79,8 @@ function composeCard(item) {
     imageCard.alt = item.name;
     titleCard.textContent = item.name;
     likeButton.addEventListener('click', (evt) => { //"включение/выключение" лайка
-        const EventTarget = evt.target.closest('.element__like');
-        EventTarget.classList.toggle('element__like_active');
+        const eventTarget = evt.target.closest('.element__like');
+        eventTarget.classList.toggle('element__like_active');
     });
     trashButton.addEventListener('click', (evt) => { //удаление карточки
         evt.target.closest('.element').remove();
@@ -124,13 +120,20 @@ function formSubmitProfile(evt) {
 function formSubmitCard(evt) {
     evt.preventDefault(); //Отмена стандартной отправки формы
     addNewCard();
-    placeInput.value = '';
-    urlInput.value = '';
+    formCard.reset();
     closePopup(popupPlace);
 };
 
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openPlacePopup);
+editButton.addEventListener('click', () => {
+    openEditPopup();
+    const submitButton = formProfile.querySelector('.popup__submit-btn');
+    setButtonState(submitButton, formProfile.checkValidity(), validationConfig);
+});
+addButton.addEventListener('click', () => {
+    openPopup(popupPlace);
+    const submitButton = formCard.querySelector('.popup__submit-btn');
+    setButtonState(submitButton, formCard.checkValidity(), validationConfig);
+});
 closeButtonEdit.addEventListener('click', () => {
     closePopup(popupEdit);
 });
