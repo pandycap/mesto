@@ -1,3 +1,4 @@
+const popup = [...document.querySelectorAll('.popup')];
 const popupEdit = document.querySelector('.popup-edit');
 const popupPlace = document.querySelector('.popup-place');
 const popupPhoto = document.querySelector('.popup-photo');
@@ -41,19 +42,28 @@ function openEditPopup() {
     openPopup(popupEdit);
 };
 
-const openImagePopup = (name, link) => {
+function openImagePopup(name, link) {
     popupImage.src = link;
     popupTitle.textContent = name;
     popupImage.alt = name;
     openPopup(popupPhoto);
 };
 
+//если в списке классов evt.target есть оверлей, то удаляет класс открытия попапа
+//если evt.target вызывается на контейнере попапа, то отменяет удаление
 function closingWithOverlay(evt) {
-    if (evt.target.classList.contains('popup_opened')) { 
-        const popupIsActive = document.querySelector('.popup_opened'); 
-        closePopup(popupIsActive); 
-    } 
-}; 
+    if (evt.target.classList.contains('popup')) {
+        evt.target.classList.remove('popup_opened');
+    };
+    const popupContainer = document.querySelector('.popup__container')
+    popupContainer.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
+    });
+    const popupContainerImage = document.querySelector('.popup__opened-image')
+    popupContainerImage.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
+    });
+};
 
 function closingWithEsc(evt) {
     if (evt.key === 'Escape') {
