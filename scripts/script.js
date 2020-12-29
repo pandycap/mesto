@@ -128,6 +128,8 @@ editButton.addEventListener('click', () => {
     openEditPopup();
     const submitButton = formProfile.querySelector('.popup__submit-btn');
     setButtonState(submitButton, formProfile.checkValidity(), validationConfig);
+    hideError(formProfile, nameInput, validationConfig);
+    hideError(formProfile, jobInput, validationConfig);
 });
 addButton.addEventListener('click', () => {
     openPopup(popupPlace);
