@@ -49,20 +49,11 @@ function openImagePopup(name, link) {
     openPopup(popupPhoto);
 };
 
-//если в списке классов evt.target есть оверлей, то удаляет класс открытия попапа
-//если evt.target вызывается на контейнере попапа, то отменяет удаление
 function closingWithOverlay(evt) {
-    if (evt.target.classList.contains('popup')) {
-        evt.target.classList.remove('popup_opened');
-    };
-    const popupContainer = document.querySelector('.popup__container')
-    popupContainer.addEventListener('click', (evt) => {
-        evt.stopImmediatePropagation();
-    });
-    const popupContainerImage = document.querySelector('.popup__opened-image')
-    popupContainerImage.addEventListener('click', (evt) => {
-        evt.stopImmediatePropagation();
-    });
+    if (evt.target.classList.contains('popup')) { 
+        const popupIsOpen = document.querySelector('.popup_opened'); 
+        closePopup(popupIsOpen);
+    } 
 };
 
 function closingWithEsc(evt) {
