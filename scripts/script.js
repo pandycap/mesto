@@ -17,10 +17,6 @@ const popupPhoto = document.querySelector('.popup-photo');
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 
-const closeButtonPlace = document.querySelector('.popup__close-btn_place');
-const closeButtonEdit = document.querySelector('.popup__close-btn_edit');
-const closeButtonImage = document.querySelector('.popup__close-btn_image');
-
 const formProfile = document.querySelector('.popup__form_profile');
 const nameInput = formProfile.querySelector('.popup__input_type_name');
 const jobInput = formProfile.querySelector('.popup__input_type_job');
@@ -29,13 +25,19 @@ const formCard = document.querySelector('.popup__form_card');
 const placeInput = formCard.querySelector('.popup__input_type_place');
 const urlInput = formCard.querySelector('.popup__input_type_url');
 
+const popupImage = popupPhoto.querySelector('.popup__image');
+const popupCaption = popupPhoto.querySelector('.popup__caption');
+
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 const cardsContainer = document.querySelector('.elements');
 
 const profileEditValidate = new FormValidator(validationConfig, formProfile);
+profileEditValidate.enableValidation();
+
 const addNewCardValidate = new FormValidator(validationConfig, formCard);
+addNewCardValidate.enableValidation();
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
@@ -49,11 +51,20 @@ function openEditPopup() {
     openPopup(popupEdit);
 };
 
+function handleCardClick (name, link) {
+    popupImage.src = link;
+    popupCaption.textContent = name;
+    openPopup(popupPhoto);
+};
+
 function closingWithOverlay(evt) {
-    if (evt.target.classList.contains('popup')) { 
-        const popupIsOpen = document.querySelector('.popup_opened'); 
-        closePopup(popupIsOpen);
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
     } 
+
+    if (evt.target.classList.contains('popup__close-btn')) {
+        closePopup(evt.target.closest('.popup'));
+    }
 };
 
 function closingWithEsc(evt) {
@@ -69,16 +80,39 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closingWithEsc);
 };
 
-//создание списка массивов из начального, добавление в контейнер по отдельности
+// В консоли видно, что данные карточки есть, но никак не пойму, почему они 
+//не передаются в разметку при таком подходе =/
+
+// function createCard(data) {
+//     const card = new Card(data.name, data.link, '.card-template', handleCardClick);
+//     card.generateCard();
+//     return card;
+// }
+
+// //создание списка массивов из начального, добавление в контейнер по отдельности
+// initialCards.forEach((data) => {
+//     const cardElement = createCard(data);
+//     console.log(cardElement);
+//     cardsContainer.append(cardElement);
+//     console.log(cardsContainer);
+// });
+
+// //добавление новой карточки
+// function addNewCard() {
+//     const cardElement = createCard(placeInput.value, urlInput.value);
+//     cardsContainer.prepend(cardElement);
+// }
+
+// создание списка массивов из начального, добавление в контейнер по отдельности
 initialCards.forEach((data) => {
-    const card = new Card(data.name, data.link);
+    const card = new Card(data.name, data.link, '.card-template', handleCardClick);
     const cardElement = card.generateCard();
     cardsContainer.append(cardElement);
 });
 
 //добавление новой карточки
 function addNewCard() {
-    const card = new Card(placeInput.value, urlInput.value);
+    const card = new Card(placeInput.value, urlInput.value, '.card-template', handleCardClick);
     const cardElement = card.generateCard();
     cardsContainer.prepend(cardElement);
 }
@@ -101,22 +135,12 @@ function formSubmitCard(evt) {
 
 editButton.addEventListener('click', () => {
     openEditPopup();
-    profileEditValidate.enableValidation();
-    profileEditValidate.hideError(nameInput);
-    profileEditValidate.hideError(jobInput);
+    profileEditValidate.resetValidation();
 });
 addButton.addEventListener('click', () => {
     openPopup(popupPlace);
-    addNewCardValidate.enableValidation();
+    addNewCardValidate.resetValidation();
 });
-closeButtonEdit.addEventListener('click', () => {
-    closePopup(popupEdit);
-});
-closeButtonPlace.addEventListener('click', () => {
-    closePopup(popupPlace);
-});
-closeButtonImage.addEventListener('click', () => {
-    closePopup(popupPhoto);
-});
+
 formProfile.addEventListener('submit', formSubmitProfile);
 formCard.addEventListener('submit', formSubmitCard);
