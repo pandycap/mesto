@@ -80,40 +80,21 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closingWithEsc);
 };
 
-// В консоли видно, что данные карточки есть, но никак не пойму, почему они 
-//не передаются в разметку при таком подходе =/
-
-// function createCard(data) {
-//     const card = new Card(data.name, data.link, '.card-template', handleCardClick);
-//     card.generateCard();
-//     return card;
-// }
-
-// //создание списка массивов из начального, добавление в контейнер по отдельности
-// initialCards.forEach((data) => {
-//     const cardElement = createCard(data);
-//     console.log(cardElement);
-//     cardsContainer.append(cardElement);
-//     console.log(cardsContainer);
-// });
-
-// //добавление новой карточки
-// function addNewCard() {
-//     const cardElement = createCard(placeInput.value, urlInput.value);
-//     cardsContainer.prepend(cardElement);
-// }
-
-// создание списка массивов из начального, добавление в контейнер по отдельности
-initialCards.forEach((data) => {
+//создание карточки
+function createCard(data) {
     const card = new Card(data.name, data.link, '.card-template', handleCardClick);
-    const cardElement = card.generateCard();
+    return card.generateCard();
+}
+
+//добавление карточки из массива
+initialCards.forEach((data) => {
+    const cardElement = createCard(data);
     cardsContainer.append(cardElement);
 });
 
 //добавление новой карточки
 function addNewCard() {
-    const card = new Card(placeInput.value, urlInput.value, '.card-template', handleCardClick);
-    const cardElement = card.generateCard();
+    const cardElement = createCard({name: placeInput.value, link: urlInput.value});
     cardsContainer.prepend(cardElement);
 }
 
